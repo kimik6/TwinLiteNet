@@ -87,10 +87,10 @@ class MyDataset(torch.utils.data.Dataset):
         self.Tensor = transforms.ToTensor()
         self.valid=valid
         if valid:
-            self.root='/home/ceec/huycq/data/bdd100k/images/val'
+            self.root='/content/data/bdd100k/bdd100k/images/100k/val'
             self.names=os.listdir(self.root)
         else:
-            self.root='/home/ceec/huycq/data/bdd100k/images/train'
+            self.root='/content/data/bdd100k/bdd100k/images/100k/train'
             self.names=os.listdir(self.root)
 
     def __len__(self):
@@ -107,8 +107,8 @@ class MyDataset(torch.utils.data.Dataset):
         image_name=os.path.join(self.root,self.names[idx])
         
         image = cv2.imread(image_name)
-        label1 = cv2.imread(image_name.replace("images","segments").replace("jpg","png"), 0)
-        label2 = cv2.imread(image_name.replace("images","lane").replace("jpg","png"), 0)
+        label1 = cv2.imread(image_name.replace("images","labels/bdd_seg_gt").replace("jpg","png"), 0)
+        label2 = cv2.imread(image_name.replace("images","labels/bdd_lane_gt").replace("jpg","png"), 0)
         if not self.valid:
             if random.random()<0.5:
                 combination = (image, label1, label2)
