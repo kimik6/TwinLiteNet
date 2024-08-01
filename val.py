@@ -9,7 +9,7 @@ import torch.optim.lr_scheduler
 from const import *
 from torchvision.transforms import transforms as T
 
-=
+
 def validation(args):
     '''
     Main function for trainign and validation
