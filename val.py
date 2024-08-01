@@ -28,14 +28,14 @@ def validation(args):
 
     valLoader = torch.utils.data.DataLoader(
         myDataLoader.MyDataset( valid=True, engin='kaggle', data='bdd'),
-        batch_size=args.batch_size, shuffle=False, num_workers=args.num_workers, pin_memory=True)
+        batch_size=2, shuffle=False, num_workers=args.num_workers, pin_memory=True)
 
     total_paramters = netParams(model)
     print('Total network parameters: ' + str(total_paramters))
     
     model.load_state_dict(torch.load(args.weight))
     model.eval()
-    example = torch.rand(1, 3, 360, 640).cuda()
+    example = torch.rand(1, 3, 512, 512).cuda()
     model = torch.jit.trace(model, example)
     da_segment_results,ll_segment_results = val(valLoader, model)
 
