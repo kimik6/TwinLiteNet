@@ -7,8 +7,16 @@ from argparse import ArgumentParser
 from utils import val, netParams
 import torch.optim.lr_scheduler
 from const import *
+from torchvision.transforms import transforms as T
 
+transform=T.Compose([
+    T.ToTensor(),
+    T.Normalize(
+        mean=[0.485,0.456,0.406],
+        std=[0.229,0.224,0.225]
+    ),
 
+])
 def validation(args):
     '''
     Main function for trainign and validation
@@ -26,7 +34,7 @@ def validation(args):
         
 
     valLoader = torch.utils.data.DataLoader(
-        myDataLoader.MyDataset(valid=True),
+        myDataLoader.MyDataset(transform=transform, valid=True, engin='kaggle', data='IADD'),
         batch_size=args.batch_size, shuffle=False, num_workers=args.num_workers, pin_memory=True)
 
     total_paramters = netParams(model)
