@@ -27,7 +27,7 @@ def validation(args):
         
 
     valLoader = torch.utils.data.DataLoader(
-        myDataLoader.MyDataset( valid=True, engin='kaggle', data='IADD'),
+        myDataLoader.MyDataset( valid=True, engin='kaggle', data='bdd'),
         batch_size=args.batch_size, shuffle=False, num_workers=args.num_workers, pin_memory=True)
 
     total_paramters = netParams(model)
