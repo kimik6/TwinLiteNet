@@ -27,7 +27,7 @@ def validation(args):
         
 
     valLoader = torch.utils.data.DataLoader(
-        myDataLoader.MyDataset( valid=True, engin='kaggle', data='IADD'),
+        myDataLoader.MyDataset( valid=True, engin='kaggle', data=args.data),
         batch_size=2, shuffle=False, num_workers=args.num_workers, pin_memory=True)
 
     total_paramters = netParams(model)
@@ -49,6 +49,7 @@ if __name__ == '__main__':
 
     parser = ArgumentParser()
     parser.add_argument('--weight', default="pretrained/best.pth")
+    parser.add_argument('--data', type=str, default='bdd', help='data type, bdd or IADD')
     parser.add_argument('--num_workers', type=int, default=12, help='No. of parallel threads')
     parser.add_argument('--batch_size', type=int, default=16, help='Batch size. 12 for ESPNet-C and 6 for ESPNet. '
                                                                    'Change as per the GPU memory')
